@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import com.divisosofttech.Movie;
 
@@ -28,8 +29,9 @@ public class App {
         // 1. Get a list of all movies with a rating of 8 or above.
         // Code your solution here
     List<Movie> l1 = Movie.getMovies();
-	
+    System.out.println("Movie with rating 8 and above : ");
 	for (Movie m : l1) {
+		
 			if (m.getRating() >= 8) {
 				System.out.println(m);
 
@@ -39,9 +41,10 @@ public class App {
         
         // 2. Find all movies released after the year 2000.
         // Code your solution here
-        for(Movie m:l1) {
-        	if(m.getReleaseYear()>2000) {
-        		System.out.println(m);
+	   System.out.println("Movies released after year 2000 : ");
+        for(Movie m1:l1) {
+        	if(m1.getReleaseYear()>2000) {
+        		System.out.println(m1);
         	}
         }
         
@@ -55,12 +58,16 @@ public class App {
 
         // 4. Get a list of movies that belong to the genre 'Drama'.
         // Code your solution here
-          
-       
+        System.out.println("Movies that belong to the genre Drama : ");
+        for(Movie m3:l1) {
+        	 if(m3.getGenre()=="Drama") {
+        		 System.out.println(m3);
+        	 }
+         }
         // 5. Get a map of all movies grouped by their genre.
         // Code your solution here
         
-            
+          
        
 
 
