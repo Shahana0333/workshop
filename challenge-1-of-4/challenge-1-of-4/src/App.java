@@ -1,6 +1,9 @@
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import com.divisosofttech.Movie;
 
@@ -52,9 +55,8 @@ public class App {
 
         // 3. Get a distinct list of all genres available.
         // Code your solution here
-
+          
        
-
 
         // 4. Get a list of movies that belong to the genre 'Drama'.
         // Code your solution here
@@ -66,25 +68,31 @@ public class App {
          }
         // 5. Get a map of all movies grouped by their genre.
         // Code your solution here
+      
         
-          
-       
 
 
 
         // 6. Count how many movies belong to each genre.
         // Code your solution here
-
+        
         
 
 
 
         // 7. Find the highest-rated movie.
         // Code your solution here
-      
+       for(Movie m5:l1) {
+    	   
+       }
+        
 
         // 8. Get the average rating of all movies.
         // Code your solution here
+       int sum=0;
+    for(Movie m5:l1) {
+    	  
+       }
         
 
 
@@ -95,7 +103,13 @@ public class App {
 
         // 10. Find all movies with a rating between 7 and 9.
         // Code your solution here
-        
+    System.out.println("Moviie rating between 7 and 9");
+    for(Movie m7:l1) {
+ 	   if(m7.getRating()>=7 && m7.getRating() <=9) {
+ 		   System.out.println(m7);
+ 	   }
+    }
+     
 
         // 11. Get the top 5 highest-rated movies.
         // Code your solution here
@@ -103,8 +117,19 @@ public class App {
 
         // 12. Check if any movie has a rating below 5.
         // Code your solution here
-        
-
+//    boolean check=false;
+//        for(Movie m5:l1) {
+//        	if(m5.getRating()<5)
+//        	{
+//        	check=true;
+//        	}
+//        }
+//        if(check==true) {
+//       System.out.println("Ye")
+//        }
+//        else {
+//        	System.out.println();
+//        }
         // 13. Check if all movies are rated 6 or above.
         // Code your solution here
        
