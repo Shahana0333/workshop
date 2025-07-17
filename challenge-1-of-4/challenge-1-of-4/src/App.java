@@ -131,9 +131,25 @@ public class App {
         else {
         	System.out.println("No there are no movies rated below 5");
         }
+        
+        
+        
         // 13. Check if all movies are rated 6 or above.
         // Code your solution here
-       
+        System.out.println("Check if all movies are rated 6 or above ");
+        boolean check1=false;
+            for(Movie m6:l1) {
+            	if(m6.getRating()>=6)
+            	{
+            	check1=true;
+            	}
+            }
+            if(check1==true) {
+           System.out.println("Yes all the movies are rated 6 or above");
+            }
+            else {
+            	System.out.println("No movies are rated 6 or above");
+            }
 
 
         // 14. Find all movies that belong to more than one genre.
