@@ -1,3 +1,6 @@
+import java.util.ArrayList;
+import java.util.List;
+
 import com.divisosofttech.Movie;
 
 
@@ -24,7 +27,14 @@ public class App {
 
         // 1. Get a list of all movies with a rating of 8 or above.
         // Code your solution here
-       
+	List<Movie> l1 = Movie.getMovies();
+	
+	for (Movie m : l1) {
+			if (m.getRating() >= 8) {
+				System.out.println(m);
+
+			}
+		}
     
         
         // 2. Find all movies released after the year 2000.
