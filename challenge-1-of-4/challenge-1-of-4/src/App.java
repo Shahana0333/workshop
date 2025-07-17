@@ -117,19 +117,20 @@ public class App {
 
         // 12. Check if any movie has a rating below 5.
         // Code your solution here
-//    boolean check=false;
-//        for(Movie m5:l1) {
-//        	if(m5.getRating()<5)
-//        	{
-//        	check=true;
-//        	}
-//        }
-//        if(check==true) {
-//       System.out.println("Ye")
-//        }
-//        else {
-//        	System.out.println();
-//        }
+    System.out.println("Check if any movie has a rating below 5 : ");
+    boolean check=false;
+        for(Movie m5:l1) {
+        	if(m5.getRating()<5)
+        	{
+        	check=true;
+        	}
+        }
+        if(check==true) {
+       System.out.println("Yes there are movies rated below 5");
+        }
+        else {
+        	System.out.println("No there are no movies rated below 5");
+        }
         // 13. Check if all movies are rated 6 or above.
         // Code your solution here
        
