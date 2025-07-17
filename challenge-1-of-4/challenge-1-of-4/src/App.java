@@ -27,7 +27,7 @@ public class App {
 
         // 1. Get a list of all movies with a rating of 8 or above.
         // Code your solution here
-	List<Movie> l1 = Movie.getMovies();
+    List<Movie> l1 = Movie.getMovies();
 	
 	for (Movie m : l1) {
 			if (m.getRating() >= 8) {
@@ -39,7 +39,11 @@ public class App {
         
         // 2. Find all movies released after the year 2000.
         // Code your solution here
-
+        for(Movie m:l1) {
+        	if(m.getReleaseYear()>2000) {
+        		System.out.println(m);
+        	}
+        }
         
           
 
