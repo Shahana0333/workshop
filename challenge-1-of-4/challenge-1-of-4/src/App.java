@@ -55,7 +55,7 @@ public class App {
 
         // 3. Get a distinct list of all genres available.
         // Code your solution here
-          
+          Set<Movie> set =new HashSet<Movie>();
        
 
         // 4. Get a list of movies that belong to the genre 'Drama'.
@@ -69,7 +69,7 @@ public class App {
         // 5. Get a map of all movies grouped by their genre.
         // Code your solution here
       
-        
+        Map<String,String> map=new HashMap<String, String>();
 
 
 
@@ -82,17 +82,12 @@ public class App {
 
         // 7. Find the highest-rated movie.
         // Code your solution here
-       for(Movie m5:l1) {
-    	   
-       }
+     
         
 
         // 8. Get the average rating of all movies.
         // Code your solution here
-       int sum=0;
-    for(Movie m5:l1) {
-    	  
-       }
+       
         
 
 
