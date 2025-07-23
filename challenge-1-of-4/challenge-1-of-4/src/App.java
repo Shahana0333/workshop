@@ -1,4 +1,5 @@
 import java.nio.channels.FileChannel.MapMode;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.HashMap;
@@ -7,7 +8,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
-import java.util.function.Predicate;
+import java.util.function.Predicate;import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 import com.divisosofttech.Movie;
@@ -259,37 +260,137 @@ public class App {
 
 		// Complex Questions:
 
-		// 1. Find the top 3 highest-rated movies for each genre.
+		// 1. Find the top 3 highest-rated movies for each genre. 
 		// Code your solution here
-
+		System.out.println("Top 3 highest-rated movies for each genre : ");
+		List<Movie> l1 = Movie.getMovies();
+		Map<String, List<Movie>> top3ByGenre = l1.stream()
+	            .collect(Collectors.groupingBy( Movie::getGenre, Collectors.collectingAndThen( Collectors.toList(),
+	            		list -> list.stream()
+                        .sorted(Comparator.comparingDouble(Movie::getRating).reversed())
+                        .limit(3)
+                        .collect(Collectors.toList())
+        )
+    ));
+		top3ByGenre.forEach((genre, topMovies) -> {
+            System.out.println("Genre: " + genre);
+            topMovies.forEach(System.out::println);
+            System.out.println();
+        });
+          
+	                   
 		// 2. Get a map of the average rating of movies per genre.
 		// Code your solution here
+		System.out.println("Average rating of movies per genre : ");
+		Map<String, Double> averageRatingperGenre = l1.stream() 
+				.collect(Collectors.groupingBy(Movie::getGenre,Collectors.averagingDouble(Movie::getRating)));
+				averageRatingperGenre.forEach((genre,avgrating)->
+				System.out.println("Genre: " + genre + " => Average Rating: " + avgrating));
+				
+		
 
 		// 3. Find the movie with the maximum duration in each genre.
 		// Code your solution here
+				System.out.println("Movie with the maximum duration in each genre: ");
+				Map<String, Optional<Movie>>maxDur=l1.stream()
+					.collect(Collectors.groupingBy(Movie::getGenre,Collectors.maxBy(Comparator.comparingInt(Movie::getDuration))));
+				maxDur.forEach((genre, movieOpt) -> {
+		            System.out.println("Genre: " + genre);
+		            movieOpt.ifPresent(System.out::println);
+		            System.out.println();
+		        });
+				
+				
 
-		// 4. Get a list of movies that have both 'Action' and 'Drama' as genres.
+		// 4. Get a list of movies that have both 'Action' and 'Drama' as genres. //no movies with both genre in one
 		// Code your solution here
+				System.out.println("List of movies that have both 'Action' and 'Drama' as genres: ");
+				List<Movie> m = l1.stream()
+					    .filter(movie -> movie.getGenre().contains("Action") || movie.getGenre().contains("Drama"))
+					    .collect(Collectors.toList());
+
+					m.forEach(System.out::println);
+		
+				
 
 		// 5. Find the second highest-rated movie.
 		// Code your solution here
+					System.out.println("Second highest-rated movie.: ");
+					List<Movie> secondHighestRated = l1.stream()
+						    .sorted(Comparator.comparingDouble(Movie::getRating).reversed())
+						    .skip(1)
+						    .limit(1)
+						    .collect(Collectors.toList());
+
+						secondHighestRated.forEach(System.out::println);
+					
 
 		// 6. Get a list of movies whose title starts with the letter 'A'.
 		// Code your solution here
+						System.out.println("Movies whose title starts with the letter 'A': ");
+						List<Movie>startwithA=l1.stream()
+						.filter(title->title.getTitle().startsWith("A"))
+						.collect(Collectors.toList());
+						
+						startwithA.forEach(System.out::println);
 
 		// 7. Get a map of movie titles and their respective durations in hours and
 		// minutes.
 		// Code your solution here
+						System.out.println("Map of movie titles and their respective durations in hours and minutes :");
+						Map<String, String> movieDurationMap = l1.stream()
+							    .collect(Collectors.toMap(
+							        Movie::getTitle,
+							        titles -> {
+							            int hours =  titles.getDuration() / 60; //ex:142 minutes → 2h 22m (since 142 / 60 = 2 hours, 142 % 60 = 22 minutes)
+							            int minutes =  titles.getDuration() % 60; //using division for hour and modular for minutes
+							            return hours + "h " + minutes + "m";//here we are converting number to string
+							        }
+							    ));
+
+							movieDurationMap.forEach((title, duration) ->
+							    System.out.println(title + " -> " + duration));		
+						
 
 		// 8. Find all movies released in the last 10 years.
 		// Code your solution here
+							System.out.println("Movies released in the last 10 years:");
+							int currentYear = LocalDate.now().getYear(); // example: 2025 getting the current year
+							int yearThreshold = currentYear - 10;        // you're checking for movies from 2015 onwards
+
+							List<Movie> last10Years = l1.stream()
+							    .filter(movie -> movie.getReleaseYear() >= yearThreshold) //movies where release year is greater than or equal to 2015.
+							    .collect(Collectors.toList());
+
+							
+							last10Years.forEach(System.out::println);
+							
 
 		// 9. Get a list of movies sorted by rating, and for ties, by title
 		// alphabetically.
 		// Code your solution here
+							System.out.println("Movies sorted by rating and then by title:");
+							List<Movie> sortedMovies = l1.stream()
+								    .sorted(Comparator.comparingDouble(Movie::getRating).reversed() // Sort by rating (descending)
+								        .thenComparing(Movie::getTitle))                             // Tie-breaker: title (ascending)
+								    .collect(Collectors.toList());
+
+								
+								sortedMovies.forEach(System.out::println);			
+							
 
 		// 10. Find the total number of genres that each movie belongs to.
 		// Code your solution here
+								System.out.println("Total number of genres that each movie belongs to:");
+								l1.forEach(movie -> {  //go through each movie
+								    String title = movie.getTitle();
+								    String genre = movie.getGenre(); // e.g. "Action, Drama"
+								    
+								    // Split the genre string by comma, remove spaces, and count
+								    int count = genre.split(",").length;
+								    
+								    System.out.println(title + " has " + count + " genre(s).");
+								});
 
 	}
 }
